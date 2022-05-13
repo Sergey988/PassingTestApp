@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32407.343
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeftMenuApp", "LeftMenuApp\LeftMenuApp.csproj", "{83867CAD-335A-471C-AF63-5C7FAD4C6456}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{83867CAD-335A-471C-AF63-5C7FAD4C6456}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83867CAD-335A-471C-AF63-5C7FAD4C6456}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83867CAD-335A-471C-AF63-5C7FAD4C6456}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83867CAD-335A-471C-AF63-5C7FAD4C6456}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0DB65225-817F-41A9-9611-263B454E1C02}
+	EndGlobalSection
+EndGlobal

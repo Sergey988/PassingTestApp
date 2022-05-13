@@ -1,0 +1,82 @@
+﻿<Window x:Class="LeftMenuApp.View.CreateNewQuestion"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LeftMenuApp.View"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:viewmodels="clr-namespace:LeftMenuApp.ViewModels"
+        d:DataContext="{d:DesignInstance Type=viewmodels:CreateQuestionViewModel}"
+        mc:Ignorable="d"
+        Title="CreateNewQuestion" Height="300" Width="350"
+         Background="#FF0C1925">
+    <Grid>
+        <StackPanel Orientation="Vertical"
+                    Margin="15"
+                    >
+            <TextBlock Text="Type the question:"
+                       Foreground="Wheat"/>
+            <TextBox Margin="0 8" Background="#FF6E99BB"/>
+
+            <TextBlock Text="Type the answer and check the correct answer:"
+                       Foreground="Wheat"
+                       Margin="0 20 0 0"/>
+            <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Center"
+                        Margin="10 0">
+                <TextBlock Text="1.  "
+                           Foreground="Wheat"
+                           VerticalAlignment="Center"/>
+
+
+                <TextBox Margin="0 8"
+                         Background="#FF6E99BB"
+                         Width="250"
+                         Text="{Binding TextChangedTextBox1, Mode=OneWayToSource}">
+                </TextBox>
+
+
+                <CheckBox x:Name="checkBox1"
+                          VerticalAlignment="Center"
+                          IsChecked="False"
+                          Margin="10 0 0 0"
+                          />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Center"
+                        Margin="10 0">
+                <TextBlock Text="2.  "
+                           Foreground="Wheat"
+                           VerticalAlignment="Center"/>
+                <TextBox Margin="0 8"
+                         Background="#FF6E99BB"
+                         Width="250"/>
+                <CheckBox x:Name="checkBox2"
+                          VerticalAlignment="Center"
+                          IsChecked="False"
+                          Margin="10 0 0 0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center"
+                        Margin="10 0">
+                <TextBlock Text="3.  "
+                           Foreground="Wheat"
+                           VerticalAlignment="Center"/>
+                <TextBox Margin="0 8"
+                         Background="#FF6E99BB"
+                         Width="250"/>
+                <CheckBox x:Name="checkBox3"
+                          VerticalAlignment="Center"
+                          IsChecked="False"
+                          Margin="10 0 0 0"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel VerticalAlignment="Bottom" Margin="20">
+            <Button Content="Create"
+                    Margin="50 0"
+                    Padding="25 0"
+                    Background="#FF205620"
+                    Foreground="White"/>
+        </StackPanel>
+
+    </Grid>
+</Window>

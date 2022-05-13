@@ -1,0 +1,23 @@
+﻿<Window x:Class="LeftMenuApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels = "clr-namespace:LeftMenuApp.ViewModels"
+        xmlns:inf="clr-namespace:LeftMenuApp.Infrastructure"
+        xmlns:views="clr-namespace:LeftMenuApp.View"
+        d:DataContext="{d:DesignInstance Type=viewModels:MainViewModel}"
+        mc:Ignorable="d"
+        Title="MainWindow"
+        Height="550"
+        Width="800"
+        MinHeight="550"
+        Background="#FF0C1925">
+    <ContentControl.Resources>
+        <ResourceDictionary Source="View/UsersViewresourcesDictionary.xaml" />
+    </ContentControl.Resources>
+    <ContentControl x:Name="ContentPlaceHolder"
+                    Content="{Binding MainViewContent}"
+                    ContentTemplateSelector="{StaticResource  MainViewTemplateSelector}" />
+
+</Window>
