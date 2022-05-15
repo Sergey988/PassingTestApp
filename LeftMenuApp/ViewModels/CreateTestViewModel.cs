@@ -1,6 +1,8 @@
 ﻿using LeftMenuApp.Commands;
 using LeftMenuApp.Model;
 using LeftMenuApp.View;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
@@ -9,12 +11,12 @@ namespace LeftMenuApp.ViewModels
 {
     public class CreateTestViewModel: ViewModelBase
     {
-        private BindingList<Test> tests;
+        private BindingList<Question> questions;
 
-        public BindingList<Test> Tests
+        public BindingList<Question> Questions
         {
-            get => tests;
-            set => Set(ref tests, value);
+            get => questions;
+            set => Set(ref questions, value);
         }
 
         public RelayCommand OpenCreateQuestionWindow { get; }
@@ -22,19 +24,23 @@ namespace LeftMenuApp.ViewModels
         public CreateTestViewModel()
         {
             OpenCreateQuestionWindow = new RelayCommand(_ => CreateQuestionWindow());
+            Questions = new();
         }
 
         private void CreateQuestionWindow()
         {
             var createQuestionViewModel = new CreateQuestionViewModel();
-            CreateNewQuestion newQuestionWindow = new CreateNewQuestion() { DataContext = createQuestionViewModel };
+            var newQuestionWindow = new CreateNewQuestion() { DataContext = createQuestionViewModel };
+
             newQuestionWindow.Owner = Application.Current.MainWindow;
             newQuestionWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
 
             if (newQuestionWindow.ShowDialog() == true)
             {
+                Questions.Add(createQuestionViewModel.Question);
 
             }
+
         }
     }
 }

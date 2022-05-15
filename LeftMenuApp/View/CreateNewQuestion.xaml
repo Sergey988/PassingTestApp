@@ -8,7 +8,8 @@
         xmlns:viewmodels="clr-namespace:LeftMenuApp.ViewModels"
         d:DataContext="{d:DesignInstance Type=viewmodels:CreateQuestionViewModel}"
         mc:Ignorable="d"
-        Title="CreateNewQuestion" Height="300" Width="350"
+        x:Name="CreateQuestionWindow"
+        Title="CreateNewQuestion" Height="350" Width="450"
          Background="#FF0C1925">
     <Grid>
         <StackPanel Orientation="Vertical"
@@ -16,7 +17,11 @@
                     >
             <TextBlock Text="Type the question:"
                        Foreground="Wheat"/>
-            <TextBox Margin="0 8" Background="#FF6E99BB"/>
+            <TextBox Margin="0 8"
+                     Background="#FF6E99BB"
+                     Foreground="#FF0C1925"
+                     FontWeight="SemiBold"
+                     Text="{Binding QuestionTitle, Mode=OneWayToSource}"/>
 
             <TextBlock Text="Type the answer and check the correct answer:"
                        Foreground="Wheat"
@@ -28,18 +33,19 @@
                            Foreground="Wheat"
                            VerticalAlignment="Center"/>
 
-
                 <TextBox Margin="0 8"
                          Background="#FF6E99BB"
+                         Foreground="#FF0C1925"
+                         FontWeight="SemiBold"
                          Width="250"
-                         Text="{Binding TextChangedTextBox1, Mode=OneWayToSource}">
-                </TextBox>
+                         Text="{Binding AnswerFirst, Mode=OneWayToSource}"/>
 
 
                 <CheckBox x:Name="checkBox1"
                           VerticalAlignment="Center"
-                          IsChecked="False"
+                          IsChecked="{Binding IsCorrectAnswerFirst}"
                           Margin="10 0 0 0"
+
                           />
             </StackPanel>
             <StackPanel Orientation="Horizontal"
@@ -50,10 +56,13 @@
                            VerticalAlignment="Center"/>
                 <TextBox Margin="0 8"
                          Background="#FF6E99BB"
-                         Width="250"/>
+                         Foreground="#FF0C1925"
+                         FontWeight="SemiBold"
+                         Width="250"
+                         Text="{Binding AnswerSecond, Mode=OneWayToSource}"/>
                 <CheckBox x:Name="checkBox2"
                           VerticalAlignment="Center"
-                          IsChecked="False"
+                          IsChecked="{Binding IsCorrectAnswerSecond}"
                           Margin="10 0 0 0"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center"
@@ -63,19 +72,27 @@
                            VerticalAlignment="Center"/>
                 <TextBox Margin="0 8"
                          Background="#FF6E99BB"
-                         Width="250"/>
+                         Foreground="#FF0C1925"
+                         FontWeight="SemiBold"
+                         Width="250"
+                         Text="{Binding AnswerThird, Mode=OneWayToSource}"/>
                 <CheckBox x:Name="checkBox3"
                           VerticalAlignment="Center"
-                          IsChecked="False"
+                          IsChecked="{Binding IsCorrectAnswerThird}"
                           Margin="10 0 0 0"/>
             </StackPanel>
         </StackPanel>
-        <StackPanel VerticalAlignment="Bottom" Margin="20">
+        <StackPanel VerticalAlignment="Bottom" Margin="20" HorizontalAlignment="Right">
             <Button Content="Create"
-                    Margin="50 0"
-                    Padding="25 0"
+                    Width="150"
+                    Padding="25 5"
                     Background="#FF205620"
-                    Foreground="White"/>
+                    Foreground="White"
+                    Command="{Binding CreateQuestion}"
+                    CommandParameter="{Binding ElementName=CreateQuestionWindow}"
+                    IsDefault="True"
+                    />
+
         </StackPanel>
 
     </Grid>
