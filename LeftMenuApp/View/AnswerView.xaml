@@ -92,7 +92,7 @@
 
         <TextBox Grid.Column="1"
                  DockPanel.Dock="Left"
-                 Background="Transparent"
+                 Background="#FF0C1925"
                  Foreground="Wheat"
                  FontWeight="SemiBold"
                  VerticalAlignment="Center"
