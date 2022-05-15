@@ -1,10 +1,8 @@
 ﻿using LeftMenuApp.Commands;
+using LeftMenuApp.Data;
 using LeftMenuApp.Model;
-using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -14,50 +12,20 @@ namespace LeftMenuApp.ViewModels
     {
         private Question question;
 
-        private string answerFirst;
-
-        private string answerSecond;
-
-        private string answerThird;
-
         private string questionTitle;
 
-        private string isCorrectAnswerFirst = "False";
+        private ObservableCollection<AnswerViewModel> answers;
 
-        private string isCorrectAnswerSecond = "False";
-
-        private string isCorrectAnswerThird = "False";
-
-        //private string isCancel = "false";
-
-        //public string IsCancel
-        //{
-        //    get => isCancel;
-        //    set => Set(ref isCancel, value);
-        //}
-
+        public ObservableCollection<AnswerViewModel> Answers
+        {
+            get => answers;
+            set => Set(ref answers, value);
+        }
 
         public Question Question
         {
             get => question;
             set => Set(ref question, value);
-        }
-
-        public string IsCorrectAnswerFirst
-        {
-            get => isCorrectAnswerFirst;
-            set => Set(ref isCorrectAnswerFirst, value);
-        }
-
-        public string IsCorrectAnswerSecond
-        {
-            get => isCorrectAnswerSecond;
-            set => Set(ref isCorrectAnswerSecond, value);
-        }
-        public string IsCorrectAnswerThird
-        {
-            get => isCorrectAnswerThird;
-            set => Set(ref isCorrectAnswerThird, value);
         }
 
         public string QuestionTitle
@@ -66,58 +34,39 @@ namespace LeftMenuApp.ViewModels
             set => Set(ref questionTitle, value);
         }
 
-        public string AnswerFirst
-        {
-            get => answerFirst;
-            set => Set(ref answerFirst, value);
-        }
-
-        public string AnswerSecond
-        {
-            get => answerSecond;
-            set => Set(ref answerSecond, value);
-        }
-
-        public string AnswerThird
-        {
-            get => answerThird;
-            set => Set(ref answerThird, value);
-        }
-
         public ICommand CreateQuestion { get; set; }
+
+        public ICommand AddAnswerCommand { get; set; }
 
         public CreateQuestionViewModel()
         {
+            Answers = new ObservableCollection<AnswerViewModel>();
+
             CreateQuestion = new RelayCommand(CreateNewQuestion);
+            AddAnswerCommand = new RelayCommand(
+                _ => Answers.Add(new AnswerViewModel() { AnswerNumber = Answers.Count + 1 }),
+                _ => Answers.Count < 3);
         }
 
         public void CreateNewQuestion(object parameter)
         {
-            var listAnswer = new List<Answer>() {
-                new Answer
-                {
-                    Title = AnswerFirst,
-                    IsAnswerCorrect = Convert.ToBoolean(IsCorrectAnswerFirst)
-                },
-                new Answer
-                {
-                    Title = AnswerSecond,
-                    IsAnswerCorrect = Convert.ToBoolean(IsCorrectAnswerSecond)
-                },
-                new Answer
-                {
-                    Title = AnswerThird,
-                    IsAnswerCorrect = Convert.ToBoolean(IsCorrectAnswerThird)
-                }
-            };
+            if (!IsQuestionValid())
+            {
+                return;
+            }
 
             Question = new Question
             {
                 Title = QuestionTitle,
-                Answers = listAnswer
+                Answers = Answers.Select(x => x.Answer).ToList()
             };
+
             (parameter as Window).DialogResult = true;
-            //IsCancel = "True";
         }
+
+        private bool IsQuestionValid()
+            => !string.IsNullOrEmpty(QuestionTitle)
+               && Answers.All(x => x.ModelValid)
+               && Answers.Any(x => x.IsCorrect);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using LeftMenuApp.Commands;
+using LeftMenuApp.Data;
 using LeftMenuApp.Model;
 using LeftMenuApp.View;
 using System;
@@ -13,6 +14,14 @@ namespace LeftMenuApp.ViewModels
     {
         private BindingList<Question> questions;
 
+        private string testTitle;
+
+        public string TestTitle
+        {
+            get => testTitle;
+            set => Set(ref testTitle, value);
+        }
+
         public BindingList<Question> Questions
         {
             get => questions;
@@ -20,10 +29,19 @@ namespace LeftMenuApp.ViewModels
         }
 
         public RelayCommand OpenCreateQuestionWindow { get; }
+        public ICommand CreateTestCommand { get; set; }
 
         public CreateTestViewModel()
         {
             OpenCreateQuestionWindow = new RelayCommand(_ => CreateQuestionWindow());
+            Questions = new();
+            CreateTestCommand = new RelayCommand(_=> CreateTest());
+        }
+
+        private void CreateTest()
+        {
+            DataWorker.CreateTest(TestTitle, Questions);
+            TestTitle = null;
             Questions = new();
         }
 

@@ -6,94 +6,69 @@
         xmlns:local="clr-namespace:LeftMenuApp.View"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:viewmodels="clr-namespace:LeftMenuApp.ViewModels"
+        xmlns:views="clr-namespace:LeftMenuApp.View"
         d:DataContext="{d:DesignInstance Type=viewmodels:CreateQuestionViewModel}"
         mc:Ignorable="d"
         x:Name="CreateQuestionWindow"
         Title="CreateNewQuestion" Height="350" Width="450"
-         Background="#FF0C1925">
+         Background="#FF0C1925"
+        MinWidth="400"
+        MinHeight="350">
     <Grid>
         <StackPanel Orientation="Vertical"
                     Margin="15"
                     >
             <TextBlock Text="Type the question:"
                        Foreground="Wheat"/>
-            <TextBox Margin="0 8"
-                     Background="#FF6E99BB"
-                     Foreground="#FF0C1925"
+            <TextBox Margin="0 10"
+                     Padding="5 0"
+                     VerticalContentAlignment="Center"
+                     Background="#FF173852"
+                     Foreground="Wheat"
                      FontWeight="SemiBold"
+                     BorderThickness="1"
+                     Height="30"
                      Text="{Binding QuestionTitle, Mode=OneWayToSource}"/>
 
             <TextBlock Text="Type the answer and check the correct answer:"
                        Foreground="Wheat"
-                       Margin="0 20 0 0"/>
-            <StackPanel Orientation="Horizontal"
-                        VerticalAlignment="Center"
-                        Margin="10 0">
-                <TextBlock Text="1.  "
-                           Foreground="Wheat"
-                           VerticalAlignment="Center"/>
+                       Margin="0 10 0 10"/>
 
-                <TextBox Margin="0 8"
-                         Background="#FF6E99BB"
-                         Foreground="#FF0C1925"
-                         FontWeight="SemiBold"
-                         Width="250"
-                         Text="{Binding AnswerFirst, Mode=OneWayToSource}"/>
+            <ListBox ItemsSource="{Binding Answers}"
+                     Padding="0 5"
+                     MinHeight="120"
+                     Background="#FF173852">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <views:AnswerView />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
 
 
-                <CheckBox x:Name="checkBox1"
-                          VerticalAlignment="Center"
-                          IsChecked="{Binding IsCorrectAnswerFirst}"
-                          Margin="10 0 0 0"
 
-                          />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal"
-                        VerticalAlignment="Center"
-                        Margin="10 0">
-                <TextBlock Text="2.  "
-                           Foreground="Wheat"
-                           VerticalAlignment="Center"/>
-                <TextBox Margin="0 8"
-                         Background="#FF6E99BB"
-                         Foreground="#FF0C1925"
-                         FontWeight="SemiBold"
-                         Width="250"
-                         Text="{Binding AnswerSecond, Mode=OneWayToSource}"/>
-                <CheckBox x:Name="checkBox2"
-                          VerticalAlignment="Center"
-                          IsChecked="{Binding IsCorrectAnswerSecond}"
-                          Margin="10 0 0 0"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center"
-                        Margin="10 0">
-                <TextBlock Text="3.  "
-                           Foreground="Wheat"
-                           VerticalAlignment="Center"/>
-                <TextBox Margin="0 8"
-                         Background="#FF6E99BB"
-                         Foreground="#FF0C1925"
-                         FontWeight="SemiBold"
-                         Width="250"
-                         Text="{Binding AnswerThird, Mode=OneWayToSource}"/>
-                <CheckBox x:Name="checkBox3"
-                          VerticalAlignment="Center"
-                          IsChecked="{Binding IsCorrectAnswerThird}"
-                          Margin="10 0 0 0"/>
-            </StackPanel>
         </StackPanel>
-        <StackPanel VerticalAlignment="Bottom" Margin="20" HorizontalAlignment="Right">
+
+        <DockPanel VerticalAlignment="Bottom" Margin="20" HorizontalAlignment="Stretch">
+            <Button Content="Add answer"
+                    Command="{Binding AddAnswerCommand}"
+                    HorizontalAlignment="Left"
+                    Width="120"
+                    Background="#FF173852"
+                    Foreground="Wheat" Cursor="Hand"
+                    />
             <Button Content="Create"
-                    Width="150"
+                    HorizontalAlignment="Right"
+                    Width="120"
                     Padding="25 5"
                     Background="#FF205620"
                     Foreground="White"
                     Command="{Binding CreateQuestion}"
                     CommandParameter="{Binding ElementName=CreateQuestionWindow}"
-                    IsDefault="True"
+                    IsDefault="True" Cursor="Hand"
                     />
 
-        </StackPanel>
+        </DockPanel>
 
     </Grid>
 </Window>

@@ -1,5 +1,6 @@
 ﻿using LeftMenuApp.Model;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 
 namespace LeftMenuApp.Data
@@ -82,25 +83,26 @@ namespace LeftMenuApp.Data
             }
         }
 
-        public static string CreateTest(string testName, List<Question> questions)
+        public static string CreateTest(string testTitle, BindingList<Question> question)
         {
-            string result = "Exeption";
-
             using (AppContextDb db = new AppContextDb())
             {
-                bool checkIsExist = db.Tests.Any(q => q.Title == testName);
+                string result = "Exeption";
+
+                bool checkIsExist = db.Tests.Any(q => q.Title == testTitle);
 
                 if (checkIsExist)
                     return result;
 
-                Test newTest = new Test
+                Test newTest = new()
                 {
-                    Title = testName
+                    Title = testTitle,
+                    Questions = question.ToList()
                 };
 
                 db.Tests.Add(newTest);
                 db.SaveChanges();
-                return "OK";
+                return "Ok";
             }
         }
     }
