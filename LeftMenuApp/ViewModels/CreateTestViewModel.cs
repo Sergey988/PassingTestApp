@@ -40,6 +40,9 @@ namespace LeftMenuApp.ViewModels
 
         private void CreateTest()
         {
+            if (string.IsNullOrEmpty(TestTitle))
+                return;
+
             DataWorker.CreateTest(TestTitle, Questions);
             TestTitle = null;
             Questions = new();
