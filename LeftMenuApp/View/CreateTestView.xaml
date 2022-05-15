@@ -5,12 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:LeftMenuApp.View" xmlns:viewmodels="clr-namespace:LeftMenuApp.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:CreateTestViewModel}"
              mc:Ignorable="d"
-             d:DesignHeight="450" d:DesignWidth="800"
+             d:DesignHeight="500" d:DesignWidth="800"
              Background="#FF0C1925">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"></RowDefinition>
-            <RowDefinition Height="240"></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition Height="250"></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
 
@@ -18,35 +19,65 @@
                     Background="#FF173852"
                     HorizontalAlignment="Stretch">
 
-            <Button Content="Add new question"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    Background="#FF205620"
-                    Foreground="white"
-                    FontSize="13"
-                    Height="35"
-                    Width="150"
-                    Margin="20 0 0 0"
-                    Command="{Binding OpenCreateQuestionWindow}"/>
-
-            <TextBlock Text="Create test page"
+            <TextBlock Text="Test name:"
+                       VerticalAlignment="Center"
                        FontSize="15"
+                       Foreground="Wheat"
+                       Margin="10 0 0 0"/>
+
+            <TextBox Margin="10 0"
+                     Padding="5 0"
+                     Width="400"
+                     VerticalContentAlignment="Center"
+                     Background="#FF0C1925"
+                     Foreground="Wheat"
+                     FontWeight="SemiBold"
+                     BorderThickness="1"
+                     Height="30"
+                     Text="{Binding TestTitle, Mode=TwoWay}"/>
+
+            <TextBlock Text="CREATE TEST PAGE"
+                       FontSize="14"
+                       VerticalAlignment="Center"
                        HorizontalAlignment="Right"
                        TextAlignment="Right"
                        Foreground="Wheat"
-                       Padding="0 10 20 0"
+                       Padding="0 0 20 0"
                        Width="150"/>
-
         </DockPanel>
 
-        <StackPanel Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="bottom">
+        <Button Grid.Row="1"
+                Content="Add new question"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Background="#FF205620"
+                Foreground="white"
+                FontSize="13"
+                Height="35"
+                Width="150"
+                Margin="20 0 0 0"
+                Command="{Binding OpenCreateQuestionWindow}"/>
+
+        <StackPanel Grid.Row="2" Margin="20 10">
+            <ListView ItemsSource="{Binding Questions}"
+                      DisplayMemberPath="Title"
+                      Background="#FF173852"
+                      Foreground="Wheat"
+                      FontSize="14"
+                      MinHeight="210"
+                      Padding="10 5">
+            </ListView>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="bottom">
             <Button Content="Create test"
                     Background="#FF205620"
                     Foreground="white"
                     FontSize="13"
                     Height="35"
                     Padding="15 0"
-                    Margin="0 0 15 15"/>
+                    Margin="0 0 20 0"
+                    Command="{Binding CreateTestCommand}"/>
         </StackPanel>
     </Grid>
 </UserControl>

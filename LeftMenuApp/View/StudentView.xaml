@@ -80,13 +80,6 @@
                         Command="{Binding ViewCommand}"
                         CommandParameter="allTest"/>
 
-                <Button x:Name="Show_all_question"
-                        Style="{StaticResource LinkButton}"
-                        DockPanel.Dock="Top"
-                        Content="Start test"
-                        Command="{Binding ViewCommand}"
-                        CommandParameter="allQuestion"/>
-
                 <Button x:Name="Logout"
                         Style="{StaticResource LeftMenuButton}" DockPanel.Dock="Bottom"
                         Background="#FF650A0B"

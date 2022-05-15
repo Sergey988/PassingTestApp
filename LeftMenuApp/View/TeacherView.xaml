@@ -97,7 +97,7 @@
                         CommandParameter="allQuestion"/>
 
                 <Button x:Name="Logout"
-                        Style="{StaticResource LeftMenuButton}"               DockPanel.Dock="Bottom"
+                        Style="{StaticResource LeftMenuButton}"                            DockPanel.Dock="Bottom"
                         Background="#FF650A0B"
                         Margin="0"
                         Content="Logout"
