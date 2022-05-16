@@ -11,13 +11,12 @@
         mc:Ignorable="d"
         x:Name="CreateQuestionWindow"
         Title="CreateNewQuestion" Height="350" Width="450"
-         Background="#FF0C1925"
+        Background="#FF0C1925"
         MinWidth="400"
         MinHeight="350">
     <Grid>
         <StackPanel Orientation="Vertical"
-                    Margin="15"
-                    >
+                    Margin="15">
             <TextBlock Text="Type the question:"
                        Foreground="Wheat"/>
             <TextBox Margin="0 10"
@@ -43,10 +42,8 @@
                         <views:AnswerView />
                     </DataTemplate>
                 </ListBox.ItemTemplate>
+
             </ListBox>
-
-
-
         </StackPanel>
 
         <DockPanel VerticalAlignment="Bottom" Margin="20" HorizontalAlignment="Stretch">
@@ -55,8 +52,8 @@
                     HorizontalAlignment="Left"
                     Width="120"
                     Background="#FF173852"
-                    Foreground="Wheat" Cursor="Hand"
-                    />
+                    Foreground="Wheat" Cursor="Hand"/>
+
             <Button Content="Create"
                     HorizontalAlignment="Right"
                     Width="120"
@@ -65,9 +62,7 @@
                     Foreground="White"
                     Command="{Binding CreateQuestion}"
                     CommandParameter="{Binding ElementName=CreateQuestionWindow}"
-                    IsDefault="True" Cursor="Hand"
-                    />
-
+                    IsDefault="True" Cursor="Hand"/>
         </DockPanel>
 
     </Grid>

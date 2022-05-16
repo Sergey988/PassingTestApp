@@ -19,9 +19,7 @@ namespace LeftMenuApp.ViewModels
 
         public ICommand LoginCommand { get; set; }
 
-
         #endregion
-
 
         #region Properties
 
