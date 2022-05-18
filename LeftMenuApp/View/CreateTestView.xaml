@@ -27,12 +27,11 @@
                        Foreground="Wheat"
                        Margin="10 0 0 0"/>
 
-            <TextBox Margin="10 0"
+            <TextBox Style="{StaticResource ResourceKey=LoginBox}"
+                     Margin="10 0"
                      Padding="5 0"
                      Width="400"
                      VerticalContentAlignment="Center"
-                     Background="#FF0C1925"
-                     Foreground="Wheat"
                      FontWeight="SemiBold"
                      BorderThickness="1"
                      Height="30"

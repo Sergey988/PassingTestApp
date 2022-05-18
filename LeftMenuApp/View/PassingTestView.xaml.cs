@@ -1,5 +1,4 @@
-﻿using LeftMenuApp.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,14 +16,13 @@ using System.Windows.Shapes;
 namespace LeftMenuApp.View
 {
     /// <summary>
-    /// Interaction logic for ShowAllQuestionView.xaml
+    /// Interaction logic for PassingTestView.xaml
     /// </summary>
-    public partial class ShowAllQuestionView : UserControl
+    public partial class PassingTestView : UserControl
     {
-        public ShowAllQuestionView()
+        public PassingTestView()
         {
             InitializeComponent();
-            //DataContext = new ShowAllQuestionViewModel();
         }
     }
 }

@@ -71,7 +71,7 @@ namespace LeftMenuApp.ViewModels
                 return;
             }
 
-            QuestionsForCurrentTest = DataWorker.GetAllQuestionsByTestId(SelectedTest.Id);
+            QuestionsForCurrentTest = DataWorker.GetTestQuestions(SelectedTest.Id);
             SelectedTestName = SelectedTest.Title;
             SelectedTestQuestionCount = QuestionsForCurrentTest.Count();
         }
