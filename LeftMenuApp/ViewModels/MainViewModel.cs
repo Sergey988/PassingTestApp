@@ -1,5 +1,4 @@
-﻿
-using LeftMenuApp.Commands;
+﻿using LeftMenuApp.Commands;
 using LeftMenuApp.Data;
 using LeftMenuApp.Model;
 using LeftMenuApp.Services;

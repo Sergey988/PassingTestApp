@@ -1,5 +1,4 @@
-﻿
-using LeftMenuApp.Commands;
+﻿using LeftMenuApp.Commands;
 using LeftMenuApp.Services;
 using System.Windows.Input;
 
@@ -11,12 +10,12 @@ namespace LeftMenuApp.ViewModels
 
         public ICommand ViewCommand { get; }
 
-        private ViewModelBase _selectedViewModel;
+        private ViewModelBase selectedViewModel;
 
         public ViewModelBase SelectedViewModel
         {
-            get => _selectedViewModel;
-            set => Set(ref _selectedViewModel, value);
+            get => selectedViewModel;
+            set => Set(ref selectedViewModel, value);
         }
 
         public TeacherViewModel(LoginService loginService)

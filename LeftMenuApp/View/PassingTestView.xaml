@@ -1,0 +1,182 @@
+﻿<UserControl x:Class="LeftMenuApp.View.PassingTestView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:LeftMenuApp.View"
+             mc:Ignorable="d"
+             xmlns:views="clr-namespace:LeftMenuApp.View"
+             xmlns:viewmodels="clr-namespace:LeftMenuApp.ViewModels"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             d:DataContext="{d:DesignInstance Type=viewmodels:PassingTestViewModel}"
+             d:DesignHeight="500" d:DesignWidth="800"
+             Background="#FF0C1925">
+
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction
+                Command="{Binding ViewLoadedCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="300"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <DockPanel Height="50"
+                   Background="Transparent"
+                   HorizontalAlignment="Stretch">
+
+            <TextBlock Text="Test name:"
+                       VerticalAlignment="Center"
+                       FontSize="15"
+                       Foreground="Wheat"
+                       Margin="20 0 0 0"/>
+
+            <ComboBox ItemsSource="{Binding AllTest}"
+                      Margin="10 0"
+                      Padding="5 0"
+                      Width="350"
+                      VerticalContentAlignment="Center"
+                      Foreground="#FF0C1925"
+                      FontWeight="SemiBold"
+                      BorderThickness="1"
+                      Height="30"
+                      SelectedItem="{Binding SelectedTest}">
+
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock
+                            Width="200"
+                            Foreground="#FF0C1925"
+                            Text="{Binding Title}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+
+            </ComboBox>
+
+            <Button Grid.Row="1"
+                Content="Start test"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Background="#FF205620"
+                Foreground="white"
+                FontSize="13"
+                Height="35"
+                Width="100"
+                Margin="20 0 0 0"
+                Command="{Binding StartTestCommand}"/>
+
+            <TextBlock Text="TESTING PAGE"
+                       FontSize="14"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Right"
+                       TextAlignment="Right"
+                       Foreground="Wheat"
+                       Padding="0 0 20 0"
+                       Width="150"/>
+        </DockPanel>
+        <DockPanel Grid.Row="1"
+                   Margin="20"
+                   Width="550"
+                   HorizontalAlignment="Left">
+
+            <TabControl
+                ItemsSource="{Binding Questions}"
+                DisplayMemberPath="Number"
+                Background="Transparent"
+                BorderThickness="2"
+                BorderBrush="#FF173852"
+                HorizontalAlignment="Left"
+                Width="550"
+                >
+                <TabControl.Resources>
+                    <Style TargetType="TabItem">
+                      <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="TabItem">
+                                    <Border Name="Border"
+                                            BorderThickness="2,2,2,0"
+                                            BorderBrush="#FF173852"
+                                            CornerRadius="0,0,0,0"
+                                            Margin="3,0">
+                                        <ContentPresenter x:Name="ContentSite"
+                                                          VerticalAlignment="Center"
+                                                          HorizontalAlignment="Center"
+                                                          ContentSource="Header"
+                                                          Margin="15,3"/>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter TargetName="Border" Property="Background" Value="#FF173852" />
+                                            <Setter Property="Foreground" Value="wheat"/>
+                                        </Trigger>
+                                        <Trigger Property="IsSelected" Value="False">
+                                            <Setter TargetName="Border" Property="Background" Value="#FF0C1925" />
+                                            <Setter Property="Foreground" Value="wheat"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </TabControl.Resources>
+                <TabControl.ContentTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding Title}"
+                                       Margin="20 10"
+                                       Foreground="Wheat"
+                                       FontSize="14"/>
+                            <ItemsControl ItemsSource="{Binding Answers}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <views:AnswerView IsReadOnly="True"/>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </DataTemplate>
+                </TabControl.ContentTemplate>
+            </TabControl>
+        </DockPanel>
+
+        <DockPanel Grid.Row="2"
+                   Margin="20"
+                   Width="550"
+                   HorizontalAlignment="Left">
+            <StackPanel Width="300">
+                <TextBlock FontSize="15"
+                           Margin="10 10 10 5"
+                           Foreground="Wheat">
+                    <Run Text="Correct answers - "></Run>
+                    <Run Text="{Binding AcceptedAnswersCount, Mode=OneWay}"/>
+                </TextBlock>
+
+                <TextBlock FontSize="15"
+                           Margin="10 5 10 10"
+                           Foreground="Wheat">
+                    <Run Text="Test passing success - "></Run>
+                    <Run Text="{Binding AcceptedAnswersPercentage, Mode=OneWay}"/>
+                    <Run Text="%"/>
+                </TextBlock>
+
+            </StackPanel>
+            <Button
+                Content="Finish test"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Background="#FF205620"
+                Foreground="white"
+                FontSize="13"
+                Height="35"
+                Width="100"
+                Margin="20 0 0 0"
+                Command="{Binding EndTest}"/>
+        </DockPanel>
+    </Grid>
+</UserControl>

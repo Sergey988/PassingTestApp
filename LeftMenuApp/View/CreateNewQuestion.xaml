@@ -10,7 +10,7 @@
         d:DataContext="{d:DesignInstance Type=viewmodels:CreateQuestionViewModel}"
         mc:Ignorable="d"
         x:Name="CreateQuestionWindow"
-        Title="CreateNewQuestion" Height="350" Width="450"
+        Title="CreateNewQuestion" Height="400" Width="450"
         Background="#FF0C1925"
         MinWidth="400"
         MinHeight="350">
@@ -19,11 +19,10 @@
                     Margin="15">
             <TextBlock Text="Type the question:"
                        Foreground="Wheat"/>
-            <TextBox Margin="0 10"
+            <TextBox Style="{StaticResource ResourceKey=LoginBox}"
+                     Margin="0 10"
                      Padding="5 0"
                      VerticalContentAlignment="Center"
-                     Background="#FF173852"
-                     Foreground="Wheat"
                      FontWeight="SemiBold"
                      BorderThickness="1"
                      Height="30"
@@ -35,18 +34,18 @@
 
             <ListBox ItemsSource="{Binding Answers}"
                      Padding="0 5"
-                     MinHeight="120"
+                     MinHeight="180"
                      Background="#FF173852">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <views:AnswerView />
+                        <views:AnswerView IsReadOnly="False" />
                     </DataTemplate>
                 </ListBox.ItemTemplate>
 
             </ListBox>
         </StackPanel>
 
-        <DockPanel VerticalAlignment="Bottom" Margin="20" HorizontalAlignment="Stretch">
+        <DockPanel VerticalAlignment="Bottom" Margin="15 20" HorizontalAlignment="Stretch">
             <Button Content="Add answer"
                     Command="{Binding AddAnswerCommand}"
                     HorizontalAlignment="Left"

@@ -25,31 +25,41 @@ namespace LeftMenuApp.View
             InitializeComponent();
         }
 
-        public static DependencyProperty AnswerNumberProperty
-            = DependencyProperty.Register(nameof(AnswerNumber), typeof(int), typeof(AnswerView));
+        //public static DependencyProperty AnswerNumberProperty
+        //    = DependencyProperty.Register(nameof(AnswerNumber), typeof(int), typeof(AnswerView));
 
-        public int AnswerNumber
+        //public int AnswerNumber
+        //{
+        //    get => (int)GetValue(AnswerNumberProperty);
+        //    set => SetValue(AnswerNumberProperty, value);
+        //}
+
+        //public static DependencyProperty AnswerTextProperty
+        //    = DependencyProperty.Register(nameof(AnswerText), typeof(string), typeof(AnswerView));
+
+        //public string AnswerText
+        //{
+        //    get => (string)GetValue(AnswerTextProperty);
+        //    set => SetValue(AnswerTextProperty, value);
+        //}
+
+        //public static DependencyProperty IsCorrectProperty
+        //    = DependencyProperty.Register(nameof(IsCorrect), typeof(bool), typeof(AnswerView));
+
+        //public bool IsCorrect
+        //{
+        //    get => (bool)GetValue(IsCorrectProperty);
+        //    set => SetValue(IsCorrectProperty, value);
+        //}
+
+        public static DependencyProperty IsReadOnlyProperty
+            = DependencyProperty.Register(nameof(IsReadOnly), typeof(bool), typeof(AnswerView));
+
+        public bool IsReadOnly
         {
-            get => (int)GetValue(AnswerNumberProperty);
-            set => SetValue(AnswerNumberProperty, value);
+            get => (bool)GetValue(IsReadOnlyProperty);
+            set => SetValue(IsReadOnlyProperty, value);
         }
 
-        public static DependencyProperty AnswerTextProperty
-            = DependencyProperty.Register(nameof(AnswerText), typeof(string), typeof(AnswerView));
-
-        public string AnswerText
-        {
-            get => (string)GetValue(AnswerTextProperty);
-            set => SetValue(AnswerTextProperty, value);
-        }
-
-        public static DependencyProperty IsCorrectProperty
-            = DependencyProperty.Register(nameof(IsCorrect), typeof(bool), typeof(AnswerView));
-
-        public bool IsCorrect
-        {
-            get => (bool)GetValue(IsCorrectProperty);
-            set => SetValue(IsCorrectProperty, value);
-        }
     }
 }

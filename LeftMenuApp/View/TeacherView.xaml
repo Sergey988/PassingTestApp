@@ -37,7 +37,8 @@
         </Grid.ColumnDefinitions>
 
         <Grid Grid.Row="1" Name="LeftMenu" HorizontalAlignment="Center" VerticalAlignment="Stretch" Margin="10 0 10 10">
-            <DockPanel LastChildFill="false">
+            <DockPanel LastChildFill="false"
+                       Width="130">
                 <Button x:Name="Create_test"
                         DockPanel.Dock="Top"
                         Style="{StaticResource ResourceKey=LinkButton}"
@@ -74,7 +75,13 @@
               Grid.Column="2"
               Background="AliceBlue"
               Margin="15 0 25 10">
-            <TextBlock Text="Select menu item" Background="#FF173852" Foreground="white" Padding="15"/>
+            <TextBlock
+                Text="Select menu item"
+                Background="#FF173852"
+                Foreground="white"
+                Padding="15"/>
+
+            <!--check this binding-->
             <ContentControl Content="{Binding SelectedViewModel}"/>
         </Grid>
 

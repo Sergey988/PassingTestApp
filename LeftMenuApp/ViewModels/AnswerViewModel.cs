@@ -8,9 +8,10 @@ namespace LeftMenuApp.ViewModels
         private int number;
         private string text;
         private bool isCorrect;
+        public int Id { get; set; }
 
         public Answer Answer =>
-            new Answer { Title = text, IsAnswerCorrect = IsCorrect };
+            new Answer { Id = Id, Title = text, IsAnswerCorrect = IsCorrect };
 
         public bool ModelValid => !string.IsNullOrEmpty(AnswerText);
 

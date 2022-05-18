@@ -6,20 +6,14 @@
              xmlns:views = "clr-namespace:LeftMenuApp.View"
              xmlns:viewModels = "clr-namespace:LeftMenuApp.ViewModels"
              xmlns:local="clr-namespace:LeftMenuApp.View"
+             d:DataContext="{d:DesignInstance Type=viewModels:StudentViewModel}"
              mc:Ignorable="d"
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             Background="#FF0C1925">
 
     <UserControl.Resources>
-        <DataTemplate DataType="{x:Type viewModels:CreateTestViewModel}">
-            <views:CreateTestView/>
-        </DataTemplate>
-
-        <DataTemplate DataType="{x:Type viewModels:ShowAllTestViewModel}">
-            <views:ShowAllTestView/>
-        </DataTemplate>
-
-        <DataTemplate DataType="{x:Type viewModels:ShowAllQuestionViewModel}">
-            <views:ShowAllQuestionView/>
+        <DataTemplate DataType="{x:Type viewModels:PassingTestViewModel}">
+            <views:PassingTestView/>
         </DataTemplate>
     </UserControl.Resources>
 
@@ -38,24 +32,27 @@
               Name="LeftMenu"
               HorizontalAlignment="Center"
               VerticalAlignment="Stretch"
-              Margin="10 0 10 10">
+              Width="130"
+              >
+                <DockPanel LastChildFill="false"
+                           Margin="10 0 10 10">
 
-            <DockPanel LastChildFill="false">
-                <Button x:Name="Show_all_test"
-                        Style="{StaticResource ResourceKey=LinkButton}"
-                        DockPanel.Dock="Top"
-                        Content="Show All tests"
-                        Command="{Binding ViewCommand}"
-                        CommandParameter="allTest"/>
+                    <Button x:Name="StartTest"
+                            Style="{StaticResource ResourceKey=LinkButton}"
+                            DockPanel.Dock="Top"
+                            Content="Tests"
+                            Command="{Binding ViewCommand}"
+                            CommandParameter="startTest"/>
 
-                <Button x:Name="Logout"
-                        Style="{StaticResource ResourceKey=LinkButton}" DockPanel.Dock="Bottom"
-                        Background="#FF650A0B"
-                        Margin="0"
-                        Content="Logout"
-                        Command="{Binding LogoutCommand}"
-                        />
-            </DockPanel>
+                    <Button x:Name="Logout"
+                            Style="{StaticResource ResourceKey=LinkButton}" DockPanel.Dock="Bottom"
+                            Background="#FF650A0B"
+                            Margin="0"
+                            Content="Logout"
+                            Command="{Binding LogoutCommand}"
+                            />
+                </DockPanel>
+
         </Grid>
 
         <Grid Grid.Row="1"
@@ -63,7 +60,10 @@
               Background="AliceBlue"
               Margin="15 0 25 10">
 
-            <TextBlock Text="Select menu item" Background="#FF173852" Foreground="white" Padding="15"/>
+            <TextBlock Text="Select menu item"
+                       Background="#FF173852"
+                       Foreground="white"
+                       Padding="15"/>
             <ContentControl Content="{Binding SelectedViewModel}"/>
         </Grid>
 

@@ -1,7 +1,8 @@
-﻿using LeftMenuApp.Model;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
+using LeftMenuApp.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace LeftMenuApp.Data
 {
@@ -16,15 +17,34 @@ namespace LeftMenuApp.Data
             }
         }
 
-        public static List<Question> GetAllQuestionsByTestId(int testId)
+        public static List<Question> GetTestQuestions(int testId)
         {
             // save 1 call to database
             if (testId <= 0)
-                return new();
+            {
+                throw new ArgumentException(nameof(testId));
+            }
 
-            using (AppContextDb db = new AppContextDb())
+            using (var db = new AppContextDb())
             {
                 return db.Questions.Where(q => q.Test.Id == testId).ToList();
+            }
+        }
+
+        public static List<Question> GetTestQuestionsWithAsnwers(int testId)
+        {
+            // save 1 call to database
+            if (testId <= 0)
+            {
+                throw new ArgumentException(nameof(testId));
+            }
+
+            using (var db = new AppContextDb())
+            {
+                return db.Questions
+                         .Where(q => q.Test.Id == testId)
+                         .Include(x => x.Answers)
+                         .ToList();
             }
         }
 
@@ -36,18 +56,18 @@ namespace LeftMenuApp.Data
             }
         }
 
-        public static string CreateAnswer(string answerName, bool IsAnswerCorrect, Question question)
+        public static Answer CreateAnswer(string answerName, bool IsAnswerCorrect, Question question)
         {
-            string result = "Exeption";
-
             using (AppContextDb db = new AppContextDb())
             {
-                bool checkIsExist = db.Answers.Any(q => q.Title == answerName);
+                var isExist = db.Answers.Any(q => q.Title.Equals(answerName, System.StringComparison.OrdinalIgnoreCase));
 
-                if (checkIsExist)
-                    return result;
+                if (isExist)
+                {
+                    throw new ArgumentException(nameof(answerName));
+                }
 
-                Answer newAnswer = new Answer
+                var newAnswer = new Answer
                 {
                     Title = answerName,
                     IsAnswerCorrect = IsAnswerCorrect,
@@ -56,7 +76,8 @@ namespace LeftMenuApp.Data
 
                 db.Answers.Add(newAnswer);
                 db.SaveChanges();
-                return "OK";
+
+                return newAnswer;
             }
         }
 
@@ -83,7 +104,7 @@ namespace LeftMenuApp.Data
             }
         }
 
-        public static string CreateTest(string testTitle, BindingList<Question> question)
+        public static string CreateTest(string testTitle, IList<Question> question)
         {
             using (AppContextDb db = new AppContextDb())
             {
